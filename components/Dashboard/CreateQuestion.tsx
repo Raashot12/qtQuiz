@@ -82,6 +82,7 @@ const CreateQuestion = () => {
           <TextArea
             required
             label="Question"
+            value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Enter your question"
           />
