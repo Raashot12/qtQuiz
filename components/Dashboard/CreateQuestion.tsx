@@ -68,6 +68,7 @@ const CreateQuestion = () => {
         position: 'top-left',
       });
       setQuestion('');
+      setOptions([]);
     }
     if (isError) {
       toast.error('An unexpected error occured', {
