@@ -178,7 +178,15 @@ const AccountLogin = () => {
             <Text mt={rem(20)} fw={700} fz={rem(18)} c={appColors.darkText}>
               Congratulation!
             </Text>
-            <Text fw={400} fz={rem(14)} ta="center" c={appColors.darkGray} mb={rem(32)} mt={rem(8)}>
+            <Text
+              fw={400}
+              fz={rem(14)}
+              px={16}
+              ta="center"
+              c={appColors.darkGray}
+              mb={rem(32)}
+              mt={rem(8)}
+            >
               We are thrilled to inform you that your token has been successfully received, granting
               you access to explore the next exciting part of our application - the dashboard!
             </Text>
