@@ -223,7 +223,8 @@ const LandingDashboard = () => {
         onClose={() => {
           setModalClose(false);
           setActiveTestimonialIndex(0);
-          setAnswers([]);
+          setAnswers(['']);
+          scroll(0);
         }}
         centered
         withCloseButton={false}
