@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useApiServicesAppQuestionPostMutation } from '../state/services/questionsApi';
 import { appColors } from '../SharedComponents/Color';
 
-const TextArea = styled(TextInput)`
+export const TextArea = styled(TextInput)`
   .mantine-TextInput-input {
     height: 80px !important;
     border-radius: 10px !important;

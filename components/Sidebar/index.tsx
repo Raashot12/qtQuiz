@@ -31,7 +31,7 @@ export const SidebarContainer = styled.aside<SidebarContainerProps>`
   padding-left: 48px;
   padding-top: 30px;
   height: 100vh;
-  z-index: 999;
+  z-index: 100;
   flex-shrink: 0;
   min-height: 0;
   display: flex;

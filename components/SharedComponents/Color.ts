@@ -1,6 +1,7 @@
 export const appColors = {
   textBlack: '#7A90C2',
   textGray: '#98A2B3',
+  text: '#677597',
   purpleBlue: '#48347E',
   white: '#FFFFFF',
   lightGray: '#F8F5FF ',

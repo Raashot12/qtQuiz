@@ -33,6 +33,13 @@ const injectedRtkApi = api.injectEndpoints({
         }),
       }
     ),
+    apiServicesAppQuestionEdit: build.mutation<unknown, { editQuiz: Question; id: string }>({
+      query: (arg) => ({
+        url: `/questions/${arg.id}`,
+        method: 'PUT',
+        body: arg.editQuiz,
+      }),
+    }),
   }),
 });
 
@@ -40,4 +47,5 @@ export const {
   useApiServicesAppQuestionGetQuery,
   useApiServicesAppQuestionPostMutation,
   useApiServicesAppQuestionDeleteMutation,
+  useApiServicesAppQuestionEditMutation,
 } = injectedRtkApi;

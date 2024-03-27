@@ -30,3 +30,6 @@ body {
 .mantine-PasswordInput-innerInput{
    border: none !important;
 }
+.__m__-rpd{
+  gap: 0;
+}
