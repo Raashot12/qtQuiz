@@ -252,7 +252,15 @@ const LandingDashboard = () => {
             <Text mt={rem(20)} fw={700} fz={rem(18)} c={appColors.darkText}>
               Congratulation!
             </Text>
-            <Text fw={400} fz={rem(14)} ta="center" c={appColors.darkGray} mb={rem(32)} mt={rem(8)}>
+            <Text
+              fw={400}
+              fz={rem(14)}
+              px={16}
+              ta="center"
+              c={appColors.darkGray}
+              mb={rem(32)}
+              mt={rem(8)}
+            >
               Thank you for submitting your quiz question! Your contribution helps enhance the
               learning experience for everyone in our community.Keep up the great work, and thank
               you for being a valuable part of our educational journey!.
