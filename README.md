@@ -4,7 +4,7 @@
 
 ## Demo Link
 
-Access the site at [Project-Link](https://seamless-pos.vercel.app/)
+Access the site at [Project-Link](https://qt-quiz.vercel.app/)
 ## Getting Started
 
 First, run the development server:

@@ -10,7 +10,7 @@ export type ConfirmationDialogProps = {
   isloading?: boolean;
   close: (args: boolean) => void;
   handleProceed: () => void;
-  setIdToDelete: (arg: string) => void;
+  setIdToDelete?: (arg: string) => void;
 };
 
 const ConfirmationModal = styled(Modal)`
@@ -101,7 +101,7 @@ const ConfirmationAlertDialog: React.FC<ConfirmationDialogProps> = ({
           },
         }}
         onClick={() => {
-          setIdToDelete('');
+          setIdToDelete?.('');
           close(false);
         }}
       >

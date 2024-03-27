@@ -53,7 +53,7 @@ const AccountLogin = () => {
       email: data.userEmail,
     });
   };
-  console.log(responseData?.token);
+
   useEffect(() => {
     if (isSuccess) {
       setModalClose(true);

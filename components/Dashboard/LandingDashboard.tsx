@@ -10,12 +10,19 @@ import {
   Flex,
   Group,
   Loader,
+  rem,
   Stack,
   Text,
 } from '@mantine/core';
 import styled from '@emotion/styled';
-import { IconAlertCircle, IconArrowBack, IconArrowForward } from '@tabler/icons-react';
+import { IconAlertCircle, IconArrowBack, IconArrowForward, IconSend } from '@tabler/icons-react';
+import { toast, ToastContainer } from 'react-toastify';
 import { useApiServicesAppQuestionGetQuery } from '../state/services/questionsApi';
+import ConfirmationAlertDialog from '../Shared/ConfirmationAlertDialog';
+import { ResponseAlertIndicatorModal, Wrapper } from '@/styles';
+import IconLady from '../IconComponents/IconLady';
+import IconClose from '../IconComponents/IconClose';
+import { appColors } from '../SharedComponents/Color';
 
 export type Questionnaire = {
   [key: string]: {
@@ -56,6 +63,8 @@ const QuestionContainer = styled.div`
 const LandingDashboard = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState<number>(0);
+  const [openModal, setModalClose] = useState(false);
+  const [openedConfirmDialog, setOpenedConfirmDialog] = useState<boolean>(false);
   const [answers, setAnswers] = useState<string[]>([]);
   const [questionArray, setQuestionArray] = useState<
     {
@@ -73,6 +82,12 @@ const LandingDashboard = () => {
 
   const handleNext = () => {
     const lengthOfQuestion = questionArray?.length as number;
+    if (answers[activeTestimonialIndex] === '') {
+      toast.warning('You must select an option', {
+        position: 'top-left',
+      });
+      return;
+    }
     if (activeTestimonialIndex < lengthOfQuestion - 1) {
       setActiveTestimonialIndex((prevIndex) => prevIndex + 1);
       scroll(activeTestimonialIndex + 1);
@@ -155,18 +170,96 @@ const LandingDashboard = () => {
           <FlexContainer ref={ref}>{displayTestimonialImages()}</FlexContainer>
           <Group gap={20} display={questionArray && questionArray?.length <= 0 ? 'none' : 'flex'}>
             <Box onClick={handlePrevious}>
-              <ButtonCustom h={54} fw={800} w={140} leftSection={<IconArrowBack />}>
+              <ButtonCustom
+                h={54}
+                fw={800}
+                w={140}
+                leftSection={<IconArrowBack />}
+                display={activeTestimonialIndex === 0 ? 'none' : 'inline-block'}
+              >
                 PREVIOUS
               </ButtonCustom>
             </Box>
-            <Box onClick={handleNext}>
-              <ButtonCustom fz={24} fw={800} h={54} w={140} rightSection={<IconArrowForward />}>
-                NEXT
-              </ButtonCustom>{' '}
-            </Box>
+            {(questionArray?.length as number) - 1 === activeTestimonialIndex ? (
+              <Box
+                onClick={() => {
+                  if (answers[activeTestimonialIndex] === '') {
+                    toast.warning('You must select an option', {
+                      position: 'top-left',
+                    });
+                    return;
+                  }
+                  setOpenedConfirmDialog(true);
+                }}
+              >
+                <ButtonCustom fz={24} fw={800} h={54} w={140} rightSection={<IconSend />}>
+                  SUBMIT
+                </ButtonCustom>{' '}
+              </Box>
+            ) : (
+              <Box onClick={handleNext}>
+                <ButtonCustom fz={24} fw={800} h={54} w={140} rightSection={<IconArrowForward />}>
+                  NEXT
+                </ButtonCustom>{' '}
+              </Box>
+            )}
           </Group>
         </Box>
       )}
+      <ToastContainer />
+      <ConfirmationAlertDialog
+        title="Submission"
+        content="Are you sure you want to submit this quiz answers?"
+        open={openedConfirmDialog}
+        close={setOpenedConfirmDialog}
+        isloading={isLoading}
+        handleProceed={() => {
+          setOpenedConfirmDialog(false);
+          setModalClose(true);
+        }}
+      />
+      <ResponseAlertIndicatorModal
+        opened={openModal}
+        onClose={() => {
+          setModalClose(false);
+          setActiveTestimonialIndex(0);
+          setAnswers([]);
+        }}
+        centered
+        withCloseButton={false}
+        title={
+          <Flex justify="space-between" align="center" w="100%">
+            <Box style={{ visibility: 'hidden' }}>Title</Box>
+            <IconClose
+              onclick={() => {
+                setModalClose(false);
+                setActiveTestimonialIndex(0);
+                setAnswers(['']);
+                scroll(0);
+              }}
+            />
+          </Flex>
+        }
+        transitionProps={{
+          transition: 'fade',
+          duration: 500,
+          timingFunction: 'linear',
+        }}
+      >
+        <Wrapper>
+          <Flex direction="column" align="center">
+            <IconLady />
+            <Text mt={rem(20)} fw={700} fz={rem(18)} c={appColors.darkText}>
+              Congratulation!
+            </Text>
+            <Text fw={400} fz={rem(14)} ta="center" c={appColors.darkGray} mb={rem(32)} mt={rem(8)}>
+              Thank you for submitting your quiz question! Your contribution helps enhance the
+              learning experience for everyone in our community.Keep up the great work, and thank
+              you for being a valuable part of our educational journey!.
+            </Text>
+          </Flex>
+        </Wrapper>
+      </ResponseAlertIndicatorModal>
     </Box>
   );
 };

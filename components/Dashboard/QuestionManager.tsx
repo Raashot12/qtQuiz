@@ -342,9 +342,9 @@ const QuestionManager = () => {
           <Button type="submit" mt={20} loading={editIsLoading} onClick={handleSubmit}>
             Update Question
           </Button>
-          <ToastContainer />
         </Box>
       </AccountSettingsModal>
+      <ToastContainer />
     </>
   );
 };
