@@ -324,7 +324,7 @@ const Question = ({
               </Text>
             </Flex>
             <Flex
-              w={{ base: '78%', md: '70%' }}
+              w={{ base: '78%', md: '69%' }}
               h={54}
               align="center"
               bg={selectedOption === value ? '#00CC5B' : '#CCCCCC'}
