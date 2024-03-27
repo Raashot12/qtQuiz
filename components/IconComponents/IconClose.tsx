@@ -1,4 +1,4 @@
-const IconClose = ({ onclick, size = 24 }: { onclick: () => void; size: number }) => (
+const IconClose = ({ onclick, size = 24 }: { onclick: () => void; size?: number }) => (
   <svg
     width={size}
     height={size}
