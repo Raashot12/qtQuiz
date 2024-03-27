@@ -205,7 +205,7 @@ const Question = ({
               justify="center"
               style={{ borderRadius: 10 }}
             >
-              <Text fw={800} fz={{ base: 16, md: 28 }}>
+              <Text fw={800} fz={{ base: 15, md: 28 }}>
                 {Alphabet[optionIndex]}
               </Text>
             </Flex>
@@ -221,7 +221,7 @@ const Question = ({
             >
               <Text
                 fw={800}
-                fz={{ base: 16, md: 28 }}
+                fz={{ base: 15, md: 28 }}
                 c={selectedOption === value ? '#ffff' : '#101828'}
               >
                 {value}
