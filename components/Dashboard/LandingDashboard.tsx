@@ -59,20 +59,18 @@ const QuestionContainer = styled.div`
   width: 100%; /* Adjust this width as needed */
   margin-right: 18px; /* Add some space between questions */
 `;
-
+type QuizQuestion = {
+  id: string;
+  question: string;
+  options: string[];
+};
 const LandingDashboard = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState<number>(0);
   const [openModal, setModalClose] = useState(false);
   const [openedConfirmDialog, setOpenedConfirmDialog] = useState<boolean>(false);
   const [answers, setAnswers] = useState<string[]>([]);
-  const [questionArray, setQuestionArray] = useState<
-    {
-      id: string;
-      question: string;
-      options: string[];
-    }[]
-  >();
+  const [questionArray, setQuestionArray] = useState<QuizQuestion[]>();
   const { data, isError, isLoading } = useApiServicesAppQuestionGetQuery({});
   const scroll = (index: number) => {
     if (ref.current) {
@@ -120,11 +118,7 @@ const LandingDashboard = () => {
           question,
           options,
         })
-      ) as {
-        id: string;
-        question: string;
-        options: string[];
-      }[];
+      ) as QuizQuestion[];
       setQuestionArray(questionnaireArray);
       setAnswers(Array(questionnaireArray.length).fill(''));
     }
@@ -223,7 +217,16 @@ const LandingDashboard = () => {
         onClose={() => {
           setModalClose(false);
           setActiveTestimonialIndex(0);
-          setAnswers(['']);
+          if (!isLoading && !isError) {
+            const questionnaireArray = Object.entries(data as Questionnaire).map(
+              ([id, { question, options }]) => ({
+                id,
+                question,
+                options,
+              })
+            ) as QuizQuestion[];
+            setAnswers(Array(questionnaireArray.length).fill(''));
+          }
           scroll(0);
         }}
         centered
@@ -235,7 +238,16 @@ const LandingDashboard = () => {
               onclick={() => {
                 setModalClose(false);
                 setActiveTestimonialIndex(0);
-                setAnswers(['']);
+                if (!isLoading && !isError) {
+                  const questionnaireArray = Object.entries(data as Questionnaire).map(
+                    ([id, { question, options }]) => ({
+                      id,
+                      question,
+                      options,
+                    })
+                  ) as QuizQuestion[];
+                  setAnswers(Array(questionnaireArray.length).fill(''));
+                }
                 scroll(0);
               }}
             />
