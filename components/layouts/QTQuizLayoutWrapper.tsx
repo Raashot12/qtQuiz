@@ -29,8 +29,8 @@ const PageContainer = styled.div`
   padding-right: 32px;
   flex: 1;
   @media (max-width: 768px) {
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 `;
 

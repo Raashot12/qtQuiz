@@ -43,16 +43,6 @@ jest.mock('@/state/services/getTokenApi', () => ({
       ({ token: 'mockedToken' }),
     { isSuccess: true, isError: false, isLoading: false },
   ],
-  // useApiServicesAppPatientsGetoutpatientlandinglistGetQuery: () => ({
-  //   data: landingPageDataMock(),
-  //   isLoading: false,
-  //   error: [],
-  // }),
-  // useApiServicesAppPatientsGetallpatientinclinicfortodayGetQuery: () => ({
-  //   data: allPaitientPageDataMock(),
-  //   isLoading: false,
-  //   error: [],
-  // }),
 }));
 describe('AccountLogin Component', () => {
   beforeEach(() => {

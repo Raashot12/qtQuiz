@@ -34,6 +34,11 @@ const FlexContainer = styled.div`
   margin-bottom: 40px;
   background-color: #ffff;
   box-sizing: border-box;
+  touch-action: none; /* Disables touch scroll */
+  -ms-touch-action: none; /* For IE/Edge */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const ButtonCustom = styled(Button)<ButtonProps>`
   .mantine-Button-label {
@@ -200,23 +205,23 @@ const Question = ({
               justify="center"
               style={{ borderRadius: 10 }}
             >
-              <Text fw={800} fz={{ base: 18, md: 32 }}>
+              <Text fw={800} fz={{ base: 16, md: 28 }}>
                 {Alphabet[optionIndex]}
               </Text>
             </Flex>
             <Flex
-              w={{ base: '75%', md: '50%' }}
+              w={{ base: '78%', md: '70%' }}
               h={54}
               align="center"
               bg={selectedOption === value ? '#00CC5B' : '#CCCCCC'}
               justify="flex-start"
               style={{ borderRadius: 10 }}
-              px={20}
+              px={{ base: 10, md: 20 }}
               pos="relative"
             >
               <Text
                 fw={800}
-                fz={{ base: 18, md: 32 }}
+                fz={{ base: 16, md: 28 }}
                 c={selectedOption === value ? '#ffff' : '#101828'}
               >
                 {value}
