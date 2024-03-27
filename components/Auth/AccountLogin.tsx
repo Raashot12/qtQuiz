@@ -45,18 +45,19 @@ const AccountLogin = () => {
   const [openModal, setModalClose] = useState(false);
   const { errors } = formState;
   const router = useRouter();
-  const [register, { isSuccess, isError, isLoading }] = useApiServicesAppEmailTokenMutation();
+  const [register, { isSuccess, isError, isLoading, data: responseData }] =
+    useApiServicesAppEmailTokenMutation();
   const errorState = 'An error occured. Try again!';
   const handleRegister = async (data: RegistrationSchema) => {
-    const result = await register({
+    await register({
       email: data.userEmail,
-    }).unwrap();
-    Cookies.set('loggedin', `${result.token}`, { expires: 90 });
+    });
   };
-
+  console.log(responseData?.token);
   useEffect(() => {
     if (isSuccess) {
       setModalClose(true);
+      Cookies.set('loggedin', `${responseData?.token}`, { expires: 90 });
     }
     if (isError) {
       toast.error(`${errorState as string}`, {
@@ -93,7 +94,7 @@ const AccountLogin = () => {
                 <IconPointer />
               </Box>
               <Stack gap={2} mb={rem(32)}>
-                <Text fz={{ base: rem(24), md: rem(28) }} fw={800} color={appColors.greenAccent}>
+                <Text fz={{ base: rem(24), md: rem(28) }} fw={800} c={appColors.greenAccent}>
                   Get a token
                 </Text>
                 <Text fz={rem(16)} fw={400} c={appColors.textGray}>

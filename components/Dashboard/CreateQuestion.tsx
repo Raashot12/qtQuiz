@@ -83,6 +83,7 @@ const CreateQuestion = () => {
           <TextArea
             required
             label="Question"
+            data-testid="question"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Enter your question"
@@ -92,6 +93,7 @@ const CreateQuestion = () => {
           <TextInput
             label="Add Option"
             type="text"
+            data-testid="add-question"
             placeholder="Enter option type here"
             value={optionSelect}
             onChange={(e) => setOptionSelect(e.target.value)}
@@ -101,6 +103,7 @@ const CreateQuestion = () => {
                 h={30}
                 align="center"
                 justify="center"
+                data-testid="add"
                 bg={appColors.greenAccent}
                 style={{ borderRadius: 5, cursor: 'pointer' }}
                 onClick={() => handleAddQuestion(optionSelect as string)}
