@@ -33,12 +33,12 @@ export type Questionnaire = {
 
 const FlexContainer = styled.div`
   width: 100%;
-  /* margin: 0 auto; */
+  margin: 0 auto;
   display: flex;
   align-items: center;
   overflow-x: auto;
-  /* padding-left: 20px; */
-  padding-right: 0px;
+  padding-left: 16x;
+  padding-right: 16px;
   margin-bottom: 40px;
   background-color: #ffff;
   box-sizing: border-box;
