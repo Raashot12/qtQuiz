@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable react/button-has-type */
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Alert,
   Box,
@@ -66,18 +66,12 @@ type QuizQuestion = {
   options: string[];
 };
 const LandingDashboard = () => {
-  const ref = useRef<HTMLDivElement>(null);
   const [activeTestimonialIndex, setActiveTestimonialIndex] = useState<number>(0);
   const [openModal, setModalClose] = useState(false);
   const [openedConfirmDialog, setOpenedConfirmDialog] = useState<boolean>(false);
   const [answers, setAnswers] = useState<string[]>([]);
   const [questionArray, setQuestionArray] = useState<QuizQuestion[]>();
   const { data, isError, isLoading } = useApiServicesAppQuestionGetQuery({});
-  const scroll = (index: number) => {
-    if (ref.current) {
-      ref.current.scrollLeft = index * (ref.current.clientWidth - 17);
-    }
-  };
 
   const handleNext = () => {
     const lengthOfQuestion = questionArray?.length as number;
@@ -89,14 +83,12 @@ const LandingDashboard = () => {
     }
     if (activeTestimonialIndex < lengthOfQuestion - 1) {
       setActiveTestimonialIndex((prevIndex) => prevIndex + 1);
-      scroll(activeTestimonialIndex + 1);
     }
   };
 
   const handlePrevious = () => {
     if (activeTestimonialIndex > 0) {
       setActiveTestimonialIndex((prevIndex) => prevIndex - 1);
-      scroll(activeTestimonialIndex - 1);
     }
   };
   const handleOptionSelect = (index: number, optionIndex: number) => {
@@ -128,22 +120,20 @@ const LandingDashboard = () => {
       setAnswers(Array(questionnaireArray.length).fill(''));
     }
   }, [isLoading, isError]);
-  const displayTestimonialImages = () => (
+  const questionArrayTypeCasted = questionArray as QuizQuestion[];
+  const displayTestimonialImages = (index: number) => (
     <>
       {questionArray && questionArray?.length <= 0 ? (
         <Box fw={600} fz={18} ta="center">
           No question at moment. Please create one
         </Box>
       ) : (
-        questionArray?.map((value, index) => (
-          <Question
-            key={index}
-            index={index}
-            data={value}
-            onSelect={handleOptionSelect}
-            selectedOption={answers[index]}
-          />
-        ))
+        <Question
+          data={questionArrayTypeCasted?.[index]}
+          index={index}
+          onSelect={handleOptionSelect}
+          selectedOption={answers[index]}
+        />
       )}
     </>
   );
@@ -166,7 +156,7 @@ const LandingDashboard = () => {
         </Alert>
       ) : (
         <Box style={{ maxWidth: 1180, margin: '0 auto' }} w={{ base: '100%', md: '80%' }}>
-          <FlexContainer ref={ref}>{displayTestimonialImages()}</FlexContainer>
+          <FlexContainer>{displayTestimonialImages(activeTestimonialIndex)}</FlexContainer>
           <Group gap={20} display={questionArray && questionArray?.length <= 0 ? 'none' : 'flex'}>
             <Box onClick={handlePrevious}>
               <ButtonCustom
@@ -232,7 +222,6 @@ const LandingDashboard = () => {
             ) as QuizQuestion[];
             setAnswers(Array(questionnaireArray.length).fill(''));
           }
-          scroll(0);
         }}
         centered
         withCloseButton={false}
@@ -253,7 +242,6 @@ const LandingDashboard = () => {
                   ) as QuizQuestion[];
                   setAnswers(Array(questionnaireArray.length).fill(''));
                 }
-                scroll(0);
               }}
             />
           </Flex>
@@ -309,10 +297,10 @@ const Question = ({
 }) => (
   <QuestionContainer>
     <Text fw={800} fz={{ base: 30, md: 38 }} c="#00CC5B">
-      {data.question}?
+      {data?.question}?
     </Text>
     <Stack gap={16} mt={20}>
-      {data.options.map((value, optionIndex) => (
+      {data?.options.map((value, optionIndex) => (
         <Box key={optionIndex} onClick={() => onSelect(index, optionIndex)}>
           <Group style={{ cursor: 'pointer' }}>
             <Flex
