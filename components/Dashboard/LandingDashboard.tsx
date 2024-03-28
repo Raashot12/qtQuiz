@@ -308,7 +308,7 @@ const Question = ({
   selectedOption: string;
 }) => (
   <QuestionContainer>
-    <Text fw={800} fz={{ base: 30, md: 54 }} c="#00CC5B">
+    <Text fw={800} fz={{ base: 30, md: 48 }} c="#00CC5B">
       {data.question}?
     </Text>
     <Stack gap={16} mt={20}>
