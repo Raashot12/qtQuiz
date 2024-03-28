@@ -37,8 +37,8 @@ const FlexContainer = styled.div`
   display: flex;
   align-items: center;
   overflow-x: auto;
-  padding-left: 16x;
-  padding-right: 16px;
+  padding-left: 20px;
+  padding-right: 15px;
   margin-bottom: 40px;
   background-color: #ffff;
   box-sizing: border-box;
