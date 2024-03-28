@@ -33,7 +33,7 @@ const registrationSchema = z.object({
 type RegistrationSchema = z.infer<typeof registrationSchema>;
 const AccountLogin = () => {
   const defaultValues = {
-    userEmail: 'email@email.com',
+    userEmail: '',
   };
   const { control, handleSubmit, formState } = useForm<RegistrationSchema>({
     resolver: zodResolver(registrationSchema),

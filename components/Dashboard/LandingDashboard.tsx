@@ -33,12 +33,12 @@ export type Questionnaire = {
 
 const FlexContainer = styled.div`
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   display: flex;
   align-items: center;
   overflow-x: auto;
-  padding-left: 20px;
-  padding-right: 15px;
+  /* padding-left: 20px; */
+  padding-right: 0px;
   margin-bottom: 40px;
   background-color: #ffff;
   box-sizing: border-box;
@@ -113,7 +113,11 @@ const LandingDashboard = () => {
   };
   useEffect(() => {
     if (!isLoading && !isError) {
-      const questionnaireArray = Object.entries(data as Questionnaire).map(
+      if (data === null || data === undefined) {
+        setQuestionArray([]);
+        return;
+      }
+      const questionnaireArray = Object?.entries(data as Questionnaire).map(
         ([id, { question, options }]) => ({
           id,
           question,

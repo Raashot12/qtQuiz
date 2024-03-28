@@ -122,6 +122,10 @@ const QuestionManager = () => {
   };
   useEffect(() => {
     if (!isFetching && !isError) {
+      if (data === null || data === undefined) {
+        setQuestionArray([]);
+        return;
+      }
       const questionnaireArray = Object.entries(data as Questionnaire).map(
         ([id, { question, options }]) => ({
           id,
